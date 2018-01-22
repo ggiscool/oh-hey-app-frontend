@@ -8,21 +8,45 @@
     <title>Chat App</title>
   </head>
   <body ng-controller='MainController as ctrl'>
-    {{ ctrl.test }}
-    <p>Hello: {{ ctrl.user.username }}! </p>
 
-    <h4 ng-click="ctrl.getUsers()">Click to see SECRET SHIT</h4>
+    <!-- <h4 ng-click="ctrl.getUsers()">Click to see SECRET SHIT</h4> -->
+    <!-- <div ng-repeat="user in ctrl.users"> {{ user.username }}</div> -->
+    <div class="navBar">
+      <div class="logRegBox">
+        <p><span class="signUpBtn" ng-click="ctrl.openRegForm()">Register</span> | <span class="logInBtn" ng-if="ctrl.loggedIn == false"  ng-click="ctrl.openLoginForm()">Login</span>
+        <span class="logOutBtn" ng-if="ctrl.loggedIn == true" ng-click="ctrl.logout()"> Log Out</span></p>
 
-    <div> {{ ctrl.error }}</div>
-    <div ng-repeat="user in ctrl.users"> {{ user.username }}</div>
+      </div>
 
-    <form ng-submit="ctrl.login(userPass)">
-      <input type="text" ng-model="userPass.username" placeholder="username"/>
-      <input type="password" ng-model="userPass.password" placeholder="password"/>
-      <input type="submit"/>
-    </form>
+  <!-- WELCOME USER -->
+      <div class="welcomeUser">
+      			<p ng-if="ctrl.loggedIn == true">Welcome: <span class="purple">{{ ctrl.user.username }}!</span></p>
+      </div>
 
-    <a href="#" ng-click="ctrl.logout()">Log Me Out</a>
+  <!-- LOGIN FORM -->
+      <div class="login" ng-if="ctrl.loginForm == true">
+        <h1>Log-In</h1>
+        <p class="error"> {{ ctrl.error }}</p>
+        <form ng-submit="ctrl.login(userPass)">
+          <input type="text" ng-model="userPass.username" placeholder="username" required autofocus/>
+          <input type="password" ng-model="userPass.password" placeholder="password" required/>
+          <input type="submit"/>
+        </form>
+        <button class="closeBtn" ng-click="ctrl.openLoginForm()">Close pls</button>
+      </div>
+
+  	<!-- REGISTER FORM -->
+      <div class="register" ng-if="ctrl.regForm == true">
+        <h1>Register</h1>
+        <p class="error"> {{ ctrl.error }}</p>
+        <form ng-submit="ctrl.createUser(userPass)">
+          <input type="text" ng-model="userPass.username" placeholder="username" required autofocus/>
+          <input type="password" ng-model="userPass.password" placeholder="password" required/>
+          <input type="submit"/>
+        </form>
+        <button class="closeBtn" ng-click="ctrl.openRegForm()">Close pls</button>
+      </div>
+    </div>
 
   </body>
 </html>
