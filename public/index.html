@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html ng-app='ChatApp'>
   <head>
-    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular.min.js"></script>
     <link rel="stylesheet" type="text/css" href="style.css">
     <script type="text/javascript" src='app.js'></script>
@@ -47,60 +47,31 @@
       </div>
     </div>
 
-    <div class="TEST">
+<!-- Test Randomizer -->
+    <!-- <div class="TEST">
         <button id="getblurbs" value="Blurbs" ng-click="ctrl.randomQs()">TEST SHIT</button>
         <p id="blurbshere" ></p>
-    </div>
+    </div> -->
 <!-- catgories and questions display -->
-    <!-- <div class="questionFlex">
+    <!-- <div class="questionFlex"> -->
+    <!-- <div ng-repeat="a in ctrl.questions">
+      <h1>QUESTIONS</h1>
+      {{a.content}}
+    </div>
+  <div ng-click="ctrl.getQs()">
+    <h1>CLICK ME</h1>
+  </div> -->
+  <p id="displayQ" ></p>
+    <div ng-repeat="category in ctrl.categories">
+      <button id="getblurbs" value="Blurbs" ng-click="ctrl.randomQs(category.questions)">{{category.name}}</button>
+    </div>
 
-  		<div ng-if='ctrl.category == 1' ng-repeat="question in ctrl.questions">
-  			<div class="questionCard" ng-if="question.category_id==1" ng-click='ctrl.pickQuestion(question)'>
+  		 <div ng-if='ctrl.category == 1' ng-repeat="question in ctrl.questions">
+  			<div class="questionBtn" ng-if="question.category_id==1">
   					<p>{{question.content}}</p> <br>
   				</div>
   			</div>
-  		</div>
 
-  		<div ng-if='ctrl.category == 2' ng-repeat="question in ctrl.questions">
-  			<div class="questionCard" ng-if="question.category_id==2" ng-click='ctrl.pickQuestion(question)'>
-  				<div ng-if='ctrl.questionID == question.id'>
-  					<p>{{question.content}}</p> <br>
-  				</div>
-  			</div>
-  		</div>
-
-  		<div ng-if='ctrl.category == 3' ng-repeat="question in ctrl.questions">
-  			<div class="questionCard" ng-if="question.category_id==3" ng-click='ctrl.pickQuestion(question)'>
-  				<div ng-if='ctrl.questionID == question.id'>
-  					<p>{{question.content}}</p> <br>
-  				</div>
-  			</div>
-  		</div>
-
-  		<div ng-if='ctrl.category == 4' ng-repeat="question in ctrl.questions">
-  			<div class="questionCard" ng-if="question.category_id==4" ng-click='ctrl.pickQuestion(question)'>
-  				<div ng-if='ctrl.questionID == question.id'>
-  					<p>{{question.content}}</p> <br>
-  				</div>
-  			</div>
-  		</div>
-
-  		<div ng-if='ctrl.category == 5' ng-repeat="question in ctrl.questions">
-  			<div class="questionCard" ng-if="question.category_id==5" ng-click='ctrl.pickQuestion(question)'>
-  				<div ng-if='ctrl.questionID == question.id'>
-  					<p>{{question.content}}</p> <br>
-  				</div>
-  			</div>
-  		</div>
-
-  		<div ng-if='ctrl.category == 6' ng-repeat="question in ctrl.questions">
-  			<div class="questionCard" ng-if="question.category_id==6" ng-click='ctrl.pickQuestion(question)'>
-  				<div ng-if='ctrl.questionID == question.id'>
-  					<p>{{question.content}}</p> <br>
-  				</div>
-  			</div>
-  		</div>
-  	</div> -->
 
 
   </body>

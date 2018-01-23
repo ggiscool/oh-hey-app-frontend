@@ -2,7 +2,7 @@ const app = angular.module('ChatApp', []);
 
 app.controller('MainController', ['$http', function($http) {
 
-  this.test = "test";
+  // this.test = "test";
   this.url = "http://localhost:3000";
   this.user = {};
 	this.loggedIn = false;
@@ -22,49 +22,54 @@ app.controller('MainController', ['$http', function($http) {
   		url: this.url + '/categories'
   	}).then(response => {
   		this.categories = response.data;
+      console.log(this.categories);
   	}).catch(reject => {
   	});
 
   // Get Questions
+  this.getQs = () =>{
   	$http({
   		method: 'GET',
   		// url: this.herokuUrl + '/categories/1/questions'
   		url: this.url + '/categories/1/questions'
   	}).then(response => {
+      console.log("getting questions...");
   		this.questions = response.data;
+      console.log(this.questions);
   	}).catch(reject => {
-  		console.log('Reject: ', reject);
+  		// console.log('Reject: ', reject);
   	});
+  };
 
-  	this.displayForm = (question) => {
-  		this.err = '';
-  		if (this.display == false) {
-  			this.display = true;
-  			this.questionContent = question.content;
-  		}
-  		else {
-  			this.display = false;
-  		}
-  	};
+  	// this.displayQ = (question) => {
+  	// 	this.err = '';
+  	// 	if (this.display == false) {
+  	// 		this.display = true;
+  	// 		this.questionContent = question.content;
+  	// 	}
+  	// 	else {
+  	// 		this.display = false;
+  	// 	}
+  	// };
 
     //Randomize questions
-    this.randomQs = () => {
-      const blurbs = new Array('poop','bingo','dilly dilly','tacos','puppers','fries','shazam','right-o','steagles','brooklyn','pasta','beyonce');
+    this.randomQs = (catQs) => {
+      // const blurbs = this.questions;
        // const i = i;
-       for (i=0; i<blurbs.length; i++){
-         const newQs = blurbs[Math.floor(Math.random() * blurbs.length)];
-         document.getElementById('blurbshere').innerHTML = newQs;
+       for (i=0; i<catQs.length; i++){
+         const newQs = catQs[Math.floor(Math.random() * catQs.length)];
+         document.getElementById('displayQ').innerHTML = newQs.content;
        }
      };
-
-  	this.category = (num) => {
-  		this.category = num;
-  		this.questionID = 0;
-  	}
-
-  	this.pickQuestion = (question) => {
-  		this.questionID = question.id;
-  	}
+    //
+  	// this.category = (num) => {
+  	// 	this.category = num;
+  	// 	this.questionID = 0;
+  	// }
+    //
+  	// this.pickQuestion = (question) => {
+  	// 	this.questionID = question.id;
+  	// }
 
 
 //LOGIN/OUT/SIGNUP FORMS---------------
