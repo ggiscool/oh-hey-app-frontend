@@ -15,7 +15,6 @@
       <div class="logRegBox">
         <p><span class="signUpBtn" ng-click="ctrl.openRegForm()">Register</span> | <span class="logInBtn" ng-if="ctrl.loggedIn == false"  ng-click="ctrl.openLoginForm()">Login</span>
         <span class="logOutBtn" ng-if="ctrl.loggedIn == true" ng-click="ctrl.logout()"> Log Out</span></p>
-
       </div>
 
   <!-- WELCOME USER -->
@@ -47,6 +46,62 @@
         <button class="closeBtn" ng-click="ctrl.openRegForm()">Close pls</button>
       </div>
     </div>
+
+    <div class="TEST">
+        <button id="getblurbs" value="Blurbs" ng-click="ctrl.randomQs()">TEST SHIT</button>
+        <p id="blurbshere" ></p>
+    </div>
+<!-- catgories and questions display -->
+    <!-- <div class="questionFlex">
+
+  		<div ng-if='ctrl.category == 1' ng-repeat="question in ctrl.questions">
+  			<div class="questionCard" ng-if="question.category_id==1" ng-click='ctrl.pickQuestion(question)'>
+  					<p>{{question.content}}</p> <br>
+  				</div>
+  			</div>
+  		</div>
+
+  		<div ng-if='ctrl.category == 2' ng-repeat="question in ctrl.questions">
+  			<div class="questionCard" ng-if="question.category_id==2" ng-click='ctrl.pickQuestion(question)'>
+  				<div ng-if='ctrl.questionID == question.id'>
+  					<p>{{question.content}}</p> <br>
+  				</div>
+  			</div>
+  		</div>
+
+  		<div ng-if='ctrl.category == 3' ng-repeat="question in ctrl.questions">
+  			<div class="questionCard" ng-if="question.category_id==3" ng-click='ctrl.pickQuestion(question)'>
+  				<div ng-if='ctrl.questionID == question.id'>
+  					<p>{{question.content}}</p> <br>
+  				</div>
+  			</div>
+  		</div>
+
+  		<div ng-if='ctrl.category == 4' ng-repeat="question in ctrl.questions">
+  			<div class="questionCard" ng-if="question.category_id==4" ng-click='ctrl.pickQuestion(question)'>
+  				<div ng-if='ctrl.questionID == question.id'>
+  					<p>{{question.content}}</p> <br>
+  				</div>
+  			</div>
+  		</div>
+
+  		<div ng-if='ctrl.category == 5' ng-repeat="question in ctrl.questions">
+  			<div class="questionCard" ng-if="question.category_id==5" ng-click='ctrl.pickQuestion(question)'>
+  				<div ng-if='ctrl.questionID == question.id'>
+  					<p>{{question.content}}</p> <br>
+  				</div>
+  			</div>
+  		</div>
+
+  		<div ng-if='ctrl.category == 6' ng-repeat="question in ctrl.questions">
+  			<div class="questionCard" ng-if="question.category_id==6" ng-click='ctrl.pickQuestion(question)'>
+  				<div ng-if='ctrl.questionID == question.id'>
+  					<p>{{question.content}}</p> <br>
+  				</div>
+  			</div>
+  		</div>
+  	</div> -->
+
 
   </body>
 </html>
