@@ -37,39 +37,16 @@ app.controller('MainController', ['$http', function($http) {
   		this.questions = response.data;
       console.log(this.questions);
   	}).catch(reject => {
-  		// console.log('Reject: ', reject);
   	});
   };
 
-  	// this.displayQ = (question) => {
-  	// 	this.err = '';
-  	// 	if (this.display == false) {
-  	// 		this.display = true;
-  	// 		this.questionContent = question.content;
-  	// 	}
-  	// 	else {
-  	// 		this.display = false;
-  	// 	}
-  	// };
-
     //Randomize questions
     this.randomQs = (catQs) => {
-      // const blurbs = this.questions;
-       // const i = i;
        for (i=0; i<catQs.length; i++){
          const newQs = catQs[Math.floor(Math.random() * catQs.length)];
          document.getElementById('displayQ').innerHTML = newQs.content;
        }
      };
-    //
-  	// this.category = (num) => {
-  	// 	this.category = num;
-  	// 	this.questionID = 0;
-  	// }
-    //
-  	// this.pickQuestion = (question) => {
-  	// 	this.questionID = question.id;
-  	// }
 
 
 //LOGIN/OUT/SIGNUP FORMS---------------
@@ -110,7 +87,7 @@ this.login = (userPass) => {
      this.loggedIn = true;
 		 localStorage.setItem("token", JSON.stringify(response.data.token));
 		 this.formData = {username: this.user.username}
-     // this.openLoginForm();
+     this.openLoginForm();
    }
    else {
 		this.err = 'Username and/or Password Incorrect';
@@ -133,7 +110,7 @@ this.createUser = (userPass) => {
 
 	 if (response.status == 200) {
 
-	 	// this.openSignUpForm();
+	 	this.openSignUpForm();
 	 }
  }).catch(reject => {
 

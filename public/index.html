@@ -9,70 +9,67 @@
   </head>
   <body ng-controller='MainController as ctrl'>
 
-    <!-- <h4 ng-click="ctrl.getUsers()">Click to see SECRET SHIT</h4> -->
-    <!-- <div ng-repeat="user in ctrl.users"> {{ user.username }}</div> -->
     <div class="navBar">
-      <div class="logRegBox">
-        <p><span class="signUpBtn" ng-click="ctrl.openRegForm()">Register</span> | <span class="logInBtn" ng-if="ctrl.loggedIn == false"  ng-click="ctrl.openLoginForm()">Login</span>
-        <span class="logOutBtn" ng-if="ctrl.loggedIn == true" ng-click="ctrl.logout()"> Log Out</span></p>
+
+      <div class="leftNav">
+        <div class="logRegBox">
+          <p><span class="signUpBtn" ng-click="ctrl.openRegForm()">Register</span> | <span class="logInBtn" ng-if="ctrl.loggedIn == false"  ng-click="ctrl.openLoginForm()">Login</span>
+          <span class="logOutBtn" ng-if="ctrl.loggedIn == true" ng-click="ctrl.logout()"> Log Out</span></p>
+        </div>
+
+        <!-- LOGIN FORM -->
+            <div class="login" ng-if="ctrl.loginForm == true">
+              <h4>Log-In</h4>
+              <p class="error"> {{ ctrl.error }}</p>
+              <form ng-submit="ctrl.login(userPass)">
+                <input type="text" ng-model="userPass.username" placeholder="username" required autofocus/>
+                <input type="password" ng-model="userPass.password" placeholder="password" required/>
+                <input type="submit"/>
+              </form>
+              <form class="" ng-click="ctrl.openLoginForm()">
+                <input class="closeBtn" type="submit" value="Close pls" ></input>
+              </form>
+              <!-- <button class="closeBtn" ng-click="ctrl.openLoginForm()">Close pls</button> -->
+            </div>
+
+        	<!-- REGISTER FORM -->
+            <div class="register" ng-if="ctrl.regForm == true">
+              <h4>Register</h4>
+              <p class="error"> {{ ctrl.error }}</p>
+              <form ng-submit="ctrl.createUser(userPass)">
+                <input type="text" ng-model="userPass.username" placeholder="username" required autofocus/>
+                <input type="password" ng-model="userPass.password" placeholder="password" required/>
+                <input type="submit"/>
+              </form>
+              <form class="" ng-click="ctrl.openRegForm()">
+                <input class="closeBtn" type="submit" value="Close pls" ></input>
+              </form>
+              <!-- <button class="closeBtn" ng-click="ctrl.openRegForm()">Close pls</button> -->
+            </div>
+          </div>
+
+      <!-- WELCOME USER -->
+        <div class="rightNav">
+            <p ng-if="ctrl.loggedIn == true">Welcome: <span class="purple">{{ ctrl.user.username }}!</span></p>
+        </div>
+
       </div>
 
-  <!-- WELCOME USER -->
-      <div class="welcomeUser">
-      			<p ng-if="ctrl.loggedIn == true">Welcome: <span class="purple">{{ ctrl.user.username }}!</span></p>
-      </div>
 
-  <!-- LOGIN FORM -->
-      <div class="login" ng-if="ctrl.loginForm == true">
-        <h1>Log-In</h1>
-        <p class="error"> {{ ctrl.error }}</p>
-        <form ng-submit="ctrl.login(userPass)">
-          <input type="text" ng-model="userPass.username" placeholder="username" required autofocus/>
-          <input type="password" ng-model="userPass.password" placeholder="password" required/>
-          <input type="submit"/>
-        </form>
-        <button class="closeBtn" ng-click="ctrl.openLoginForm()">Close pls</button>
-      </div>
 
-  	<!-- REGISTER FORM -->
-      <div class="register" ng-if="ctrl.regForm == true">
-        <h1>Register</h1>
-        <p class="error"> {{ ctrl.error }}</p>
-        <form ng-submit="ctrl.createUser(userPass)">
-          <input type="text" ng-model="userPass.username" placeholder="username" required autofocus/>
-          <input type="password" ng-model="userPass.password" placeholder="password" required/>
-          <input type="submit"/>
-        </form>
-        <button class="closeBtn" ng-click="ctrl.openRegForm()">Close pls</button>
+
+
+<!-- Question Randomizer -->
+    <div class="randomizer">
+      <div class="displayQBox">
+        <p id="displayQ" ></p>
+      </div>
+      <div class="btnWrap">
+        <div class="genBtn" ng-repeat="category in ctrl.categories" id="getblurbs" value="Blurbs" ng-click="ctrl.randomQs(category.questions)">
+          {{category.name}}
+        </div>
       </div>
     </div>
-
-<!-- Test Randomizer -->
-    <!-- <div class="TEST">
-        <button id="getblurbs" value="Blurbs" ng-click="ctrl.randomQs()">TEST SHIT</button>
-        <p id="blurbshere" ></p>
-    </div> -->
-<!-- catgories and questions display -->
-    <!-- <div class="questionFlex"> -->
-    <!-- <div ng-repeat="a in ctrl.questions">
-      <h1>QUESTIONS</h1>
-      {{a.content}}
-    </div>
-  <div ng-click="ctrl.getQs()">
-    <h1>CLICK ME</h1>
-  </div> -->
-  <p id="displayQ" ></p>
-    <div ng-repeat="category in ctrl.categories">
-      <button id="getblurbs" value="Blurbs" ng-click="ctrl.randomQs(category.questions)">{{category.name}}</button>
-    </div>
-
-  		 <div ng-if='ctrl.category == 1' ng-repeat="question in ctrl.questions">
-  			<div class="questionBtn" ng-if="question.category_id==1">
-  					<p>{{question.content}}</p> <br>
-  				</div>
-  			</div>
-
-
 
   </body>
 </html>

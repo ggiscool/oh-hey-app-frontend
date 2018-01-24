@@ -1,7 +1,113 @@
 body {
   background-color: lavender;
+  margin: 0;
 }
 .navBar {
   border: 1px solid black;
   background-color: grey;
+  min-height: 50px;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+}
+.leftNav {
+  width: 50%;
+  min-height: 50px;
+  /* background: black; */
+}
+.rightNav{
+  /* background: white; */
+  width: 50%;
+  min-height: 50px;
+  text-align: right;
+}
+.login {
+  display: flex;
+}
+.login form {
+  /* flex-direction: column; */
+}
+.register {
+  display: flex;
+}
+.login button {
+  margin: 5px;
+  border: none;
+  border-radius: 12px;
+  background-color: white;
+  padding: 0;
+  text-align: center;
+  text-decoration: none;
+  color: black;
+  font-size: 10px;
+}
+.register > button {
+  margin: 5px;
+  border: none;
+  border-radius: 12px;
+  background-color: white;
+  padding: 0;
+  text-align: center;
+  text-decoration: none;
+  color: black;
+  font-size: 10px;
+}
+.logRegBox p:hover{
+  cursor:pointer;
+}
+.displayQBox {
+  border: 2px dashed black;
+  min-height: 50px;
+  width: 800px;
+  margin: auto;
+  display: flex;
+  justify-content: center;
+  /* flex-wrap: wrap; */
+  /* align-items: flex-start; */
+}
+#displayQ {
+  text-align: center;
+  /* margin: auto; */
+}
+
+/* randomizer */
+.randomizer {
+  margin: 0 auto;
+justify-content: center;
+}
+.btnWrap {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: 0 auto;
+
+}
+.genBtn {
+  margin: 5px;
+  border: none;
+  border-radius: 12px;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 16px;
+}
+.genBtn:nth-of-type(1){
+  background-color: pink;
+}
+.genBtn:nth-of-type(2){
+  background-color: #c9c9ff;
+}
+.genBtn:nth-of-type(3){
+  background-color: #cbf4b4;
+}
+.genBtn:nth-of-type(4){
+  background-color: #f1cbff;
+}
+.genBtn:nth-of-type(5){
+  background-color: #cbf4b4;
+}
+.genBtn:nth-of-type(6){
+  background-color: #c9c9ff;
 }
