@@ -13,6 +13,7 @@ app.controller('MainController', ['$http', function($http) {
   this.questionContent = '';
   this.categories = [];
 	this.questions = [];
+  this.newQs = null;
 
 
   // Get categories
@@ -43,10 +44,28 @@ app.controller('MainController', ['$http', function($http) {
     //Randomize questions
     this.randomQs = (catQs) => {
        for (i=0; i<catQs.length; i++){
-         const newQs = catQs[Math.floor(Math.random() * catQs.length)];
-         document.getElementById('displayQ').innerHTML = newQs.content;
+         this.newQs = catQs[Math.floor(Math.random() * catQs.length)];
+         document.getElementById('displayQ').innerHTML = this.newQs.content;
        }
+       document.getElementById("faveBtn").style.display="inline-block";
      };
+
+//FAVORITES POST route
+     this.favorite = (questionid) => {
+       console.log('this is question id: ', questionid);
+       this.formData = {user_id: this.user.id, question_id: questionid};
+
+       $http({
+         method: 'POST',
+         // url: this.herokuUrl + '/favorites',
+         url: this.url + '/favorites',
+         data: this.formData
+       }).then(response => {
+         console.log(response);
+       }).catch(reject => {
+         console.log('Reject: ', reject);
+       });
+     }
 
 
 //LOGIN/OUT/SIGNUP FORMS---------------

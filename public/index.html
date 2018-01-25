@@ -4,6 +4,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular.min.js"></script>
     <link rel="stylesheet" type="text/css" href="style.css">
+    <script src="https://use.fontawesome.com/fb2161162a.js"></script>
     <script type="text/javascript" src='app.js'></script>
     <title>Chat App</title>
   </head>
@@ -62,7 +63,8 @@
 <!-- Question Randomizer -->
     <div class="randomizer">
       <div class="displayQBox">
-        <p id="displayQ" ></p>
+        <p id="displayQ"></p>
+          <button id="faveBtn" class="heart" ng-if="ctrl.loggedIn == true" ng-click="ctrl.favorite(ctrl.newQs.id)"><i class="fa fa-heart" aria-hidden="true"></i></button>
       </div>
       <div class="btnWrap">
         <div class="genBtn" ng-repeat="category in ctrl.categories" id="getblurbs" value="Blurbs" ng-click="ctrl.randomQs(category.questions)">

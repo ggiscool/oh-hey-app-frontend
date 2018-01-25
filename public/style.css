@@ -24,9 +24,6 @@ body {
 .login {
   display: flex;
 }
-.login form {
-  /* flex-direction: column; */
-}
 .register {
   display: flex;
 }
@@ -55,6 +52,7 @@ body {
 .logRegBox p:hover{
   cursor:pointer;
 }
+
 .displayQBox {
   border: 2px dashed black;
   min-height: 50px;
@@ -70,10 +68,28 @@ body {
   /* margin: auto; */
 }
 
+#faveBtn {
+  display: none;
+  background: none;
+  border: none;
+  font-size: 30px;
+}
+#faveBtn:active {
+  box-shadow: 0 3px #666;
+  transform: translateY(4px);
+}
+
+.fa-heart {
+  color: red;
+}
+.fa-heart:hover {
+  cursor: pointer;
+}
+
 /* randomizer */
 .randomizer {
   margin: 0 auto;
-justify-content: center;
+  justify-content: center;
 }
 .btnWrap {
   display: flex;
@@ -92,6 +108,10 @@ justify-content: center;
   text-align: center;
   text-decoration: none;
   font-size: 16px;
+}
+.genBtn:active {
+  box-shadow: 0 3px #666;
+  transform: translateY(4px);
 }
 .genBtn:nth-of-type(1){
   background-color: pink;
