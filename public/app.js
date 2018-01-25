@@ -14,6 +14,9 @@ app.controller('MainController', ['$http', function($http) {
   this.categories = [];
 	this.questions = [];
   this.newQs = null;
+  this.userid = 0;
+  this.userfaves = [];
+  this.favequestionid = null;
 
 
   // Get categories
@@ -58,7 +61,7 @@ app.controller('MainController', ['$http', function($http) {
        $http({
          method: 'POST',
          // url: this.herokuUrl + '/favorites',
-         url: this.url + '/favorites',
+         url: this.url + '/users/' + this.user.id + '/favorites',
          data: this.formData
        }).then(response => {
          console.log(response);
@@ -67,6 +70,48 @@ app.controller('MainController', ['$http', function($http) {
        });
      }
 
+//FAVORITES GET route-------------NOT RIGHT
+
+  this.showFaves = () => {
+    $http({
+    method: 'GET',
+    // url: this.herokuUrl + '/categories/1/questions/' + this.questionID + '/answers',
+    url: this.url + '/users/' + this.user.id + '/favorites/',
+    }).then(response => {
+      this.userfaves = response.data;
+      console.log("userfaves: ", this.userfaves);
+      // this.favequestionid = response.data.question_id;
+      // console.log("this.favequestionid: ",this.favequestionid);
+      console.log("response: ", response);
+    }).catch(reject => {
+     console.log('Reject: ', reject);
+    });
+
+    if (this.showFavesModal == false) {
+    this.showFavesModal = true
+    } else {
+    this.showFavesModal = false
+    }
+    if (this.currentuser == false) {
+    this.currentuser = true;
+    }
+
+  }
+  //favorite put route
+  // this.putFave = (questionid) => {
+	// 		$http({
+	// 			method: 'PUT',
+	// 			// url: this.herokuUrl + '/categories/1/questions/' + this.questionID + '/answers/' + answerid,
+	// 			url: this.url + '/categories/1/questions/' + this.questionID + '/favorites/' + questionid,
+	// 		}).then(response => {
+	// 			console.log('Response: ', response);
+	// 		}).catch(reject => {
+	// 				console.log('Reject: ', reject);
+	// 		});
+	// 		let index = this.findquestion.findIndex(i => i.id === answerid);
+	// 		this.findanswer[index].upvote += 1;
+	// }
+//END of uncertainty-----------------------
 
 //LOGIN/OUT/SIGNUP FORMS---------------
   this.openLoginForm = () => {

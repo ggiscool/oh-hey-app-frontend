@@ -54,11 +54,29 @@
             <p ng-if="ctrl.loggedIn == true">Welcome: <span class="purple">{{ ctrl.user.username }}!</span></p>
         </div>
 
+<!-- FAVE BAR BUTTON -->
+        <div class="showFaves">
+          <button class="showFavesBtn" ng-click="ctrl.showFaves()">Peep Faves</button>
+        </div>
       </div>
 
+  <!-- FAVE BAR -->
+      <div class="showFavesModal" ng-if="ctrl.showFavesModal == true">
+        <div class="faveListTitle">
+          <h3>Faves</h3>
+            <button  ng-click="ctrl.showFaves = false">Close</button>
+        </div>
+        <div class="faveScroll">
+          <div class="faveList" ng-repeat="favorite in ctrl.userfaves">
+            <div ng-repeat="category in ctrl.categories">
+              <div ng-repeat="question in category.questions" ng-if="question.id == favorite.question_id">
 
-
-
+                  <p>{{ question.content }}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
 
 <!-- Question Randomizer -->
     <div class="randomizer">
