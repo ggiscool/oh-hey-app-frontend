@@ -143,7 +143,7 @@ body {
   /* bottom: 0; */
 }
 .faveScroll {
-  max-height: 160px;
+  max-height: 120px;
   overflow-y: scroll;
 }
 .faveListTitle {
