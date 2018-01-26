@@ -20,12 +20,11 @@
 
         <!-- LOGIN FORM -->
             <div class="login" ng-if="ctrl.loginForm == true">
-              <h4>Log-In</h4>
               <p class="error"> {{ ctrl.error }}</p>
               <form ng-submit="ctrl.login(userPass)">
                 <input type="text" ng-model="userPass.username" placeholder="username" required autofocus/>
                 <input type="password" ng-model="userPass.password" placeholder="password" required/>
-                <input type="submit"/>
+                <input type="submit" value="Log In"/>
               </form>
               <form class="" ng-click="ctrl.openLoginForm()">
                 <input class="closeBtn" type="submit" value="Close pls" ></input>
@@ -35,12 +34,11 @@
 
         	<!-- REGISTER FORM -->
             <div class="register" ng-if="ctrl.regForm == true">
-              <h4>Register</h4>
               <p class="error"> {{ ctrl.error }}</p>
               <form ng-submit="ctrl.createUser(userPass)">
                 <input type="text" ng-model="userPass.username" placeholder="username" required autofocus/>
                 <input type="password" ng-model="userPass.password" placeholder="password" required/>
-                <input type="submit"/>
+                <input type="submit" value="Register"/>
               </form>
               <form class="" ng-click="ctrl.openRegForm()">
                 <input class="closeBtn" type="submit" value="Close pls" ></input>
@@ -56,7 +54,7 @@
 
 <!-- FAVE BAR BUTTON -->
         <div class="showFaves">
-          <button class="showFavesBtn" ng-click="ctrl.showFaves()">Peep Faves</button>
+          <button class="showFavesBtn" ng-click="ctrl.displayFaves()">Peep Faves</button>
         </div>
       </div>
 
@@ -81,7 +79,7 @@
     <div class="randomizer">
       <div class="displayQBox">
         <p id="displayQ"></p>
-          <button id="faveBtn" class="heart" ng-if="ctrl.loggedIn == true" ng-click="ctrl.favorite(ctrl.newQs.id)"><i class="fa fa-heart" aria-hidden="true"></i></button>
+        <button id="faveBtn" class="heart" ng-if="ctrl.loggedIn == true" ng-click="ctrl.favorite(ctrl.newQs.id)"><i class="fa fa-heart" aria-hidden="true"></i></button>
       </div>
       <div class="btnWrap">
         <div class="genBtn" ng-repeat="category in ctrl.categories" id="getblurbs" value="Blurbs" ng-click="ctrl.randomQs(category.questions)">

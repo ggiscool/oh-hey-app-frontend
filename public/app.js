@@ -17,6 +17,7 @@ app.controller('MainController', ['$http', function($http) {
   this.userid = 0;
   this.userfaves = [];
   this.favequestionid = null;
+  this.showFavesModal = false;
 
 
   // Get categories
@@ -37,6 +38,8 @@ app.controller('MainController', ['$http', function($http) {
   		// url: this.herokuUrl + '/categories/1/questions'
   		url: this.url + '/categories/1/questions'
   	}).then(response => {
+      // this.questionViewed = true;
+      // this.liked = false;
       console.log("getting questions...");
   		this.questions = response.data;
       console.log(this.questions);
@@ -50,7 +53,9 @@ app.controller('MainController', ['$http', function($http) {
          this.newQs = catQs[Math.floor(Math.random() * catQs.length)];
          document.getElementById('displayQ').innerHTML = this.newQs.content;
        }
-       document.getElementById("faveBtn").style.display="inline-block";
+       console.log("newQs: ", this.newQs);
+       this.formData.question_id = this.newQs.id;
+       this.checkHeart();
      };
 
 //FAVORITES POST route
@@ -64,13 +69,17 @@ app.controller('MainController', ['$http', function($http) {
          url: this.url + '/users/' + this.user.id + '/favorites',
          data: this.formData
        }).then(response => {
+         this.liked = true;
+         this.checkHeart();
+         // document.getElementsByClassName("fa-heart")[0].style.color = "red";
          console.log(response);
        }).catch(reject => {
          console.log('Reject: ', reject);
        });
+
      }
 
-//FAVORITES GET route-------------NOT RIGHT
+//FAVORITES GET route
 
   this.showFaves = () => {
     $http({
@@ -79,14 +88,16 @@ app.controller('MainController', ['$http', function($http) {
     url: this.url + '/users/' + this.user.id + '/favorites/',
     }).then(response => {
       this.userfaves = response.data;
-      console.log("userfaves: ", this.userfaves);
-      // this.favequestionid = response.data.question_id;
-      // console.log("this.favequestionid: ",this.favequestionid);
-      console.log("response: ", response);
+      // console.log("userfaves: ", this.userfaves);
+      // console.log("response: ", response);
     }).catch(reject => {
      console.log('Reject: ', reject);
     });
 
+  }
+
+  this.displayFaves = () => {
+    this.showFaves();
     if (this.showFavesModal == false) {
     this.showFavesModal = true
     } else {
@@ -95,23 +106,34 @@ app.controller('MainController', ['$http', function($http) {
     if (this.currentuser == false) {
     this.currentuser = true;
     }
+  }
+
+  this.showFaves();
+
+  //Favorites heart turn reload
+  this.checkHeart = () => {
+    let counter = 0;
+    //loops through user's array of favorites and checks the question id of shown question against the id of favorited questions and marks as favorited
+    // for(i=0;i<this.userfaves.length;i++){
+        console.log("userfavesqid: ", this.userfaves[i].question_id);
+      if (this.formData.question_id == this.userfaves[i].question_id) {
+        counter++;
+        // console.log("trying to be red");
+        // document.getElementsByClassName("fa-heart")[0].style.color = "red";
+      }
+      // else {
+      //   console.log("trying to be grey");
+      //   document.getElementsByClassName("fa-heart")[0].style.color = "grey";
+      // }
+// )
+    // if (counter>0) {
+    //   document.getElementsByClassName("fa-heart")[0].style.color = "red";
+    // } else {
+    //   document.getElementsByClassName("fa-heart")[0].style.color = "grey";
+    // }
+  console.log("formData: ", this.formData.question_id);
 
   }
-  //favorite put route
-  // this.putFave = (questionid) => {
-	// 		$http({
-	// 			method: 'PUT',
-	// 			// url: this.herokuUrl + '/categories/1/questions/' + this.questionID + '/answers/' + answerid,
-	// 			url: this.url + '/categories/1/questions/' + this.questionID + '/favorites/' + questionid,
-	// 		}).then(response => {
-	// 			console.log('Response: ', response);
-	// 		}).catch(reject => {
-	// 				console.log('Reject: ', reject);
-	// 		});
-	// 		let index = this.findquestion.findIndex(i => i.id === answerid);
-	// 		this.findanswer[index].upvote += 1;
-	// }
-//END of uncertainty-----------------------
 
 //LOGIN/OUT/SIGNUP FORMS---------------
   this.openLoginForm = () => {
@@ -152,6 +174,7 @@ this.login = (userPass) => {
 		 localStorage.setItem("token", JSON.stringify(response.data.token));
 		 this.formData = {username: this.user.username}
      this.openLoginForm();
+     this.showFaves();
    }
    else {
 		this.err = 'Username and/or Password Incorrect';
