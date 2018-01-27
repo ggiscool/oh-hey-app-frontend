@@ -14,13 +14,10 @@ body {
 .leftNav {
   width: 40%;
   min-height: 50px;
-  /* text-align: left; */
 }
 .midNav {
-  border: 1px solid white;
   width: 20%;
   min-height: 50px;
-  /* text-align: right; */
   font-family: 'Ubuntu', sans-serif;
   color: #c9c9ff;
 }
