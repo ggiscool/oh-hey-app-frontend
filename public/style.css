@@ -63,6 +63,7 @@ body {
   margin: auto;
   display: flex;
   justify-content: center;
+  z-index: 0;
   /* flex-wrap: wrap; */
   /* align-items: flex-start; */
 }
@@ -86,9 +87,9 @@ body {
   /* transition: color 2s ease-out; */
   color: grey;
 }
-/* .liked {
+.like {
   color: red;
-} */
+}
 .fa-heart:hover {
   cursor: pointer;
 }
@@ -98,6 +99,7 @@ body {
 .randomizer {
   margin: 0 auto;
   justify-content: center;
+  z-index: 0;
 }
 .btnWrap {
   display: flex;
@@ -105,6 +107,7 @@ body {
   flex-wrap: wrap;
   justify-content: center;
   margin: 0 auto;
+  z-index: 0;
 
 }
 .genBtn {
@@ -143,15 +146,17 @@ body {
   background-color: #c9c9ff;
 }
 /* Faves Modal */
+.favesModalWrap {
+  position: fixed;
+  width: 100%;
+  z-index: 10;
+}
 .showFavesModal {
   background: rgba(255, 192, 203, .7);
   text-align: center;
-  justify-content: center;
+  margin: 0 auto;
   width: 50%;
   height: 210px;
-  position: fixed;
-  z-index: 10;
-  /* bottom: 0; */
 }
 .showFavesBtn {
   margin: 5px;

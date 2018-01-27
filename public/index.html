@@ -59,16 +59,18 @@
       </div>
 
   <!-- FAVE BAR -->
-      <div class="showFavesModal" ng-if="ctrl.showFavesModal == true">
-        <div class="faveListTitle">
-          <h3>Faves</h3>
-            <button  ng-click="ctrl.showFavesModal = false">Close</button>
-        </div>
-        <div class="faveScroll">
-          <div class="faveList faveScroll" ng-repeat="favorite in ctrl.userfaves">
-            <div class="faveScroll" ng-repeat="category in ctrl.categories">
-              <div class="faveScroll" ng-repeat="question in category.questions" ng-if="question.id == favorite.question_id">
-                  <p>{{ question.content }}</p>
+    <div class="favesModalWrap">
+        <div class="showFavesModal" ng-if="ctrl.showFavesModal == true">
+          <div class="faveListTitle">
+            <h3>Faves</h3>
+              <button  ng-click="ctrl.showFavesModal = false">Close</button>
+          </div>
+          <div class="faveScroll">
+            <div class="faveList faveScroll" ng-repeat="favorite in ctrl.userfaves">
+              <div class="faveScroll" ng-repeat="category in ctrl.categories">
+                <div class="faveScroll" ng-repeat="question in category.questions" ng-if="question.id == favorite.question_id">
+                    <p>{{ question.content }}</p>
+                </div>
               </div>
             </div>
           </div>
@@ -79,7 +81,7 @@
     <div class="randomizer">
       <div class="displayQBox">
         <p id="displayQ"></p>
-        <button id="faveBtn" class="heart" ng-if="ctrl.loggedIn == true" ng-click="ctrl.favorite(ctrl.newQs.id)"><i class="fa fa-heart" aria-hidden="true"></i></button>
+        <button id="faveBtn" class="heart" ng-if="ctrl.loggedIn == true" ng-click="ctrl.favorite(ctrl.newQs.id)"><i class="fa fa-heart like" aria-hidden="true" ng-if="ctrl.newQs.like"></i></button>
       </div>
       <div class="btnWrap">
         <div class="genBtn" ng-repeat="category in ctrl.categories" id="getblurbs" value="Blurbs" ng-click="ctrl.randomQs(category.questions)">

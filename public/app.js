@@ -43,6 +43,7 @@ app.controller('MainController', ['$http', function($http) {
       console.log("getting questions...");
   		this.questions = response.data;
       console.log(this.questions);
+      this.getLikes();
   	}).catch(reject => {
   	});
   };
@@ -53,15 +54,15 @@ app.controller('MainController', ['$http', function($http) {
          this.newQs = catQs[Math.floor(Math.random() * catQs.length)];
          document.getElementById('displayQ').innerHTML = this.newQs.content;
        }
-       console.log("newQs: ", this.newQs);
+       // console.log("newQs: ", this.newQs);
        this.formData.question_id = this.newQs.id;
-       this.checkHeart();
+       // this.checkHeart();
      };
 
 //FAVORITES POST route
      this.favorite = (questionid) => {
        console.log('this is question id: ', questionid);
-       this.formData = {user_id: this.user.id, question_id: questionid};
+       this.formData = {user_id: this.user.id, question_id: questionid, isliked: true};
 
        $http({
          method: 'POST',
@@ -69,8 +70,8 @@ app.controller('MainController', ['$http', function($http) {
          url: this.url + '/users/' + this.user.id + '/favorites',
          data: this.formData
        }).then(response => {
-         this.liked = true;
-         this.checkHeart();
+         // this.liked = true;
+         // this.checkHeart();
          // document.getElementsByClassName("fa-heart")[0].style.color = "red";
          console.log(response);
        }).catch(reject => {
@@ -109,31 +110,53 @@ app.controller('MainController', ['$http', function($http) {
   }
 
   this.showFaves();
-
   //Favorites heart turn reload
-  this.checkHeart = () => {
-    let counter = 0;
-    //loops through user's array of favorites and checks the question id of shown question against the id of favorited questions and marks as favorited
+
+
+  this.getLikes = () => {
+
+    console.log("is this method working?");
+    for(i=0;i<this.userfaves.length;i++){
+      this.questions.forEach((question) => {
+        if(question.id == this.userfaves[i].question_id){
+          question.like = true
+        }
+      })
+    }
+
+    console.log(this.questions);
+  }
+  // this.checkHeart = () => {
+  //   let counter = 0;
+    //loops through user's array of favorites and checks is the current question has a value of isliked=true
+    // if (this.userfaves.question_id.includes(this.formData.question_id)) {
+    //   console.log("trying to be red");
+    //   document.getElementsByClassName("fa-heart")[0].style.color = "red";
+    // } else {
+    //   console.log("trying to be grey");
+    //   document.getElementsByClassName("fa-heart")[0].style.color = "grey";
+    //       }
     // for(i=0;i<this.userfaves.length;i++){
-        console.log("userfavesqid: ", this.userfaves[i].question_id);
-      if (this.formData.question_id == this.userfaves[i].question_id) {
-        counter++;
-        // console.log("trying to be red");
-        // document.getElementsByClassName("fa-heart")[0].style.color = "red";
-      }
-      // else {
-      //   console.log("trying to be grey");
-      //   document.getElementsByClassName("fa-heart")[0].style.color = "grey";
-      // }
-// )
+    //     console.log("userfavesqid: ", this.userfaves[i].question_id);
+    //     console.log("forDataqid: ", this.formData.question_id);
+    //     console.log("isliked?: ", this.userfaves[i].isliked);
+    //   if (this.formData.question_id == this.userfaves[i].question_id && this.userfaves[i].isliked === true) {
+    //     console.log("trying to be red");
+    //     document.getElementsByClassName("fa-heart")[0].style.color = "red";
+    //   }
+    //   else {
+    //     console.log("trying to be grey");
+    //     document.getElementsByClassName("fa-heart")[0].style.color = "grey";
+    //   }
+// }
     // if (counter>0) {
     //   document.getElementsByClassName("fa-heart")[0].style.color = "red";
     // } else {
     //   document.getElementsByClassName("fa-heart")[0].style.color = "grey";
     // }
-  console.log("formData: ", this.formData.question_id);
-
-  }
+  // console.log("formData: ", this.formData.question_id);
+  //
+  // }
 
 //LOGIN/OUT/SIGNUP FORMS---------------
   this.openLoginForm = () => {
@@ -175,6 +198,8 @@ this.login = (userPass) => {
 		 this.formData = {username: this.user.username}
      this.openLoginForm();
      this.showFaves();
+     // this.getLikes();
+     this.getQs();
    }
    else {
 		this.err = 'Username and/or Password Incorrect';
@@ -196,8 +221,8 @@ this.createUser = (userPass) => {
 	 this.formData = {username: this.user.username}
 
 	 if (response.status == 200) {
-
-	 	this.openSignUpForm();
+	 	// this.openRegForm();
+    this.regForm = false;
 	 }
  }).catch(reject => {
 
