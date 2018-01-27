@@ -14,16 +14,16 @@
 
       <div class="leftNav">
         <div class="logRegBox">
-          <p><span class="signUpBtn" ng-click="ctrl.openRegForm()">Register</span> | <span class="logInBtn" ng-if="ctrl.loggedIn == false"  ng-click="ctrl.openLoginForm()">Login</span>
+          <p><span class="signUpBtn" ng-click="ctrl.openRegForm()" ng-if="ctrl.loggedIn == false">Register</span> | <span class="logInBtn" ng-if="ctrl.loggedIn == false"  ng-click="ctrl.openLoginForm()">Login</span>
           <span class="logOutBtn" ng-if="ctrl.loggedIn == true" ng-click="ctrl.logout()"> Log Out</span></p>
         </div>
 
         <!-- LOGIN FORM -->
             <div class="login" ng-if="ctrl.loginForm == true">
-              <p class="error"> {{ ctrl.error }}</p>
-              <form ng-submit="ctrl.login(userPass)">
-                <input type="text" ng-model="userPass.username" placeholder="username" required autofocus/>
-                <input type="password" ng-model="userPass.password" placeholder="password" required/>
+              <p class="error"> {{ ctrl.err }}</p>
+              <form ng-submit="ctrl.login(userLogin)">
+                <input type="text" ng-model="userLogin.username" placeholder="username" required autofocus/>
+                <input type="password" ng-model="userLogin.password" placeholder="password" required/>
                 <input type="submit" value="Log In"/>
               </form>
               <form class="" ng-click="ctrl.openLoginForm()">
@@ -33,8 +33,9 @@
             </div>
 
         	<!-- REGISTER FORM -->
+
             <div class="register" ng-if="ctrl.regForm == true">
-              <p class="error"> {{ ctrl.error }}</p>
+              <p class="error"> {{ ctrl.err }}</p>
               <form ng-submit="ctrl.createUser(userPass)">
                 <input type="text" ng-model="userPass.username" placeholder="username" required autofocus/>
                 <input type="password" ng-model="userPass.password" placeholder="password" required/>
@@ -46,6 +47,7 @@
               <!-- <button class="closeBtn" ng-click="ctrl.openRegForm()">Close pls</button> -->
             </div>
           </div>
+
 
       <!-- WELCOME USER -->
         <div class="rightNav">
@@ -81,7 +83,7 @@
     <div class="randomizer">
       <div class="displayQBox">
         <p id="displayQ"></p>
-        <button id="faveBtn" class="heart" ng-if="ctrl.loggedIn == true" ng-click="ctrl.favorite(ctrl.newQs.id)"><i class="fa fa-heart like" aria-hidden="true" ng-if="ctrl.newQs.like"></i></button>
+        <button id="faveBtn" ng-if="ctrl.loggedIn == true" ng-click="ctrl.favorite(ctrl.newQs.id)"><i id="heart" class="fa fa-heart" aria-hidden="true"></i></button>
       </div>
       <div class="btnWrap">
         <div class="genBtn" ng-repeat="category in ctrl.categories" id="getblurbs" value="Blurbs" ng-click="ctrl.randomQs(category.questions)">
@@ -89,6 +91,12 @@
         </div>
       </div>
     </div>
+
+    <!-- <h4 ng-click="ctrl.getUsers()"> Click to see Users</h4>
+    {{ctrl.error}}
+    <div ng-repeat="user in ctrl.users">
+      <h1>{{user.username}}</h1>
+    </div> -->
 
   </body>
 </html>

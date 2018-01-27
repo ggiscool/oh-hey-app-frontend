@@ -2,7 +2,7 @@ const app = angular.module('ChatApp', []);
 
 app.controller('MainController', ['$http', function($http) {
 
-  // this.test = "test";
+  // INITIAL STATES
   this.url = "http://localhost:3000";
   this.user = {};
 	this.loggedIn = false;
@@ -15,7 +15,7 @@ app.controller('MainController', ['$http', function($http) {
 	this.questions = [];
   this.newQs = null;
   this.userid = 0;
-  this.userfaves = [];
+  // this.userfaves = [];
   this.favequestionid = null;
   this.showFavesModal = false;
 
@@ -54,10 +54,10 @@ app.controller('MainController', ['$http', function($http) {
          this.newQs = catQs[Math.floor(Math.random() * catQs.length)];
          document.getElementById('displayQ').innerHTML = this.newQs.content;
        }
-       // console.log("newQs: ", this.newQs);
+       this.changeHeart(this.newQs);
        this.formData.question_id = this.newQs.id;
-       // this.checkHeart();
      };
+
 
 //FAVORITES POST route
      this.favorite = (questionid) => {
@@ -70,14 +70,15 @@ app.controller('MainController', ['$http', function($http) {
          url: this.url + '/users/' + this.user.id + '/favorites',
          data: this.formData
        }).then(response => {
-         // this.liked = true;
-         // this.checkHeart();
-         // document.getElementsByClassName("fa-heart")[0].style.color = "red";
-         console.log(response);
+         this.heartRed();
+         console.log("non-push userfaves: ", this.userfaves);
+         this.userfaves.push(response.data);
+         console.log("push userfaves: ", this.userfaves);
+         console.log("checking response: ", response);
        }).catch(reject => {
          console.log('Reject: ', reject);
        });
-
+       // this.changeHeart();
      }
 
 //FAVORITES GET route
@@ -89,74 +90,42 @@ app.controller('MainController', ['$http', function($http) {
     url: this.url + '/users/' + this.user.id + '/favorites/',
     }).then(response => {
       this.userfaves = response.data;
-      // console.log("userfaves: ", this.userfaves);
+      console.log("userfaves: ", this.userfaves);
       // console.log("response: ", response);
     }).catch(reject => {
      console.log('Reject: ', reject);
     });
-
+    console.log("userfaves: ", this.userfaves);
   }
 
   this.displayFaves = () => {
-    this.showFaves();
+    // this.showFaves();
     if (this.showFavesModal == false) {
     this.showFavesModal = true
     } else {
     this.showFavesModal = false
     }
-    if (this.currentuser == false) {
-    this.currentuser = true;
-    }
   }
 
-  this.showFaves();
-  //Favorites heart turn reload
+  //CHange heart to red
+ this.heartRed = () => {
+   document.getElementById('heart').style.color = "red";
+ }
 
-
-  this.getLikes = () => {
-
-    console.log("is this method working?");
-    for(i=0;i<this.userfaves.length;i++){
-      this.questions.forEach((question) => {
-        if(question.id == this.userfaves[i].question_id){
-          question.like = true
-        }
-      })
+  this.changeHeart = (newQuestion) => {
+    for (i=0; i<this.userfaves.length; i++) {
+      this.userfaveid = this.userfaves[i].question_id;
+      if (this.userfaveid == newQuestion.id) {
+        console.log("newQuestion.id: ", newQuestion.id);
+        console.log("yes");
+       document.getElementById('heart').style.color = "red";
+       break;
+     } else if (this.userfaveid !== newQuestion.id){
+       console.log("no");
+       document.getElementById('heart').style.color = "grey";
+     }
     }
-
-    console.log(this.questions);
   }
-  // this.checkHeart = () => {
-  //   let counter = 0;
-    //loops through user's array of favorites and checks is the current question has a value of isliked=true
-    // if (this.userfaves.question_id.includes(this.formData.question_id)) {
-    //   console.log("trying to be red");
-    //   document.getElementsByClassName("fa-heart")[0].style.color = "red";
-    // } else {
-    //   console.log("trying to be grey");
-    //   document.getElementsByClassName("fa-heart")[0].style.color = "grey";
-    //       }
-    // for(i=0;i<this.userfaves.length;i++){
-    //     console.log("userfavesqid: ", this.userfaves[i].question_id);
-    //     console.log("forDataqid: ", this.formData.question_id);
-    //     console.log("isliked?: ", this.userfaves[i].isliked);
-    //   if (this.formData.question_id == this.userfaves[i].question_id && this.userfaves[i].isliked === true) {
-    //     console.log("trying to be red");
-    //     document.getElementsByClassName("fa-heart")[0].style.color = "red";
-    //   }
-    //   else {
-    //     console.log("trying to be grey");
-    //     document.getElementsByClassName("fa-heart")[0].style.color = "grey";
-    //   }
-// }
-    // if (counter>0) {
-    //   document.getElementsByClassName("fa-heart")[0].style.color = "red";
-    // } else {
-    //   document.getElementsByClassName("fa-heart")[0].style.color = "grey";
-    // }
-  // console.log("formData: ", this.formData.question_id);
-  //
-  // }
 
 //LOGIN/OUT/SIGNUP FORMS---------------
   this.openLoginForm = () => {
@@ -181,14 +150,34 @@ app.controller('MainController', ['$http', function($http) {
 		}
 	}
 
-//Authentication--------------
-this.login = (userPass) => {
+  //GET users
+  this.getUsers = () => {
+    $http({
+    	 // url: this.herokuUrl + '/users',
+    	 url: this.url + '/users',
+    	 method: 'GET',
+    	 headers: {
+    		Authorization: 'Bearer ' + JSON.parse(localStorage.getItem('token'))
+    	}
+     }).then(response => {
+       console.log(response);
 
+    	 if (response.data.status == 401) {
+    			this.error = "Unauthorized";
+    		} else {
+    			this.users = response.data;
+    		}
+     });
+  };
+
+//Authentication--------------
+this.login = (userLogin) => {
+  this.userfaves = [];
 	$http({
 	 method: 'POST',
 	 url: this.url + '/users/login',
    // url: this.herokuUrl + '/users/login',
-	 data: { user: { username: userPass.username, password: userPass.password }},
+	 data: { user: { username: userLogin.username, password: userLogin.password }},
  }).then(response => {
    if (response.data.status == 200) {
    console.log(response);
@@ -198,7 +187,6 @@ this.login = (userPass) => {
 		 this.formData = {username: this.user.username}
      this.openLoginForm();
      this.showFaves();
-     // this.getLikes();
      this.getQs();
    }
    else {
@@ -208,7 +196,7 @@ this.login = (userPass) => {
 };
 
 this.createUser = (userPass) => {
-
+  this.userfaves = [];
 	$http({
 	 method: 'POST',
 	 // url: this.herokuUrl + '/users',
@@ -217,16 +205,18 @@ this.createUser = (userPass) => {
  }).then(response => {
 
 	 this.user = response.data.user;
-	 this.loggedIn = true;
 	 this.formData = {username: this.user.username}
+   localStorage.setItem("token", JSON.stringify(response.data.token));
 
 	 if (response.status == 200) {
 	 	// this.openRegForm();
     this.regForm = false;
 	 }
+   if (this.user.username !== null) {
+     this.loggedIn = true;
+     this.showFaves();
+   }
  }).catch(reject => {
-
-
 		this.err = 'Username Already Exists';
 	});
 };
@@ -250,6 +240,7 @@ this.getUsers = () => {
 };
 
 this.logout = () => {
+  this.userfaves = [];
   localStorage.clear('token');
   location.reload();
   this.loggedIn = false;
