@@ -2,6 +2,7 @@ body {
   background-color: lavender;
   margin: 0;
 }
+/* Nav Bar--------------- */
 .navBar {
   border: 1px solid black;
   background-color: grey;
@@ -11,22 +12,25 @@ body {
   flex-direction: row;
 }
 .leftNav {
-  width: 50%;
+  width: 40%;
   min-height: 50px;
-  /* background: black; */
+  /* text-align: left; */
+}
+.midNav {
+  border: 1px solid white;
+  width: 20%;
+  min-height: 50px;
+  /* text-align: right; */
+  font-family: 'Ubuntu', sans-serif;
+  color: #c9c9ff;
 }
 .rightNav{
-  /* background: white; */
-  width: 50%;
+  width: 40%;
   min-height: 50px;
   text-align: right;
 }
-.login {
-  display: flex;
-}
-.register {
-  display: flex;
-}
+
+
 .login button {
   margin: 5px;
   border: none;
@@ -55,7 +59,16 @@ body {
 .logRegBox p:hover{
   cursor:pointer;
 }
+.error {
+  flex-direction: column;
+  display: block;
+  color: white;
+}
+.regForm {
+  display: flex;
+}
 
+/* Questions display-------------- */
 .displayQBox {
   border: 2px dashed black;
   min-height: 50px;
@@ -64,14 +77,12 @@ body {
   display: flex;
   justify-content: center;
   z-index: 0;
-  /* flex-wrap: wrap; */
-  /* align-items: flex-start; */
 }
 #displayQ {
   text-align: center;
-  /* margin: auto; */
 }
 
+/* Favorite heart button----------------- */
 #faveBtn {
   /* display: none; */
   background: none;
@@ -90,7 +101,7 @@ body {
 }
 
 
-/* randomizer */
+/* randomizer------------------- */
 .randomizer {
   margin: 0 auto;
   justify-content: center;
@@ -114,6 +125,7 @@ body {
   text-align: center;
   text-decoration: none;
   font-size: 16px;
+  font-family: 'Open Sans', sans-serif;
 }
 .genBtn:hover{
   cursor: pointer;
@@ -140,7 +152,8 @@ body {
 .genBtn:nth-of-type(6){
   background-color: #c9c9ff;
 }
-/* Faves Modal */
+
+/* Faves Modal--------------------- */
 .favesModalWrap {
   position: fixed;
   width: 100%;
@@ -158,7 +171,7 @@ body {
   border: none;
   border-radius: 12px;
   color: black;
-  background-color: white;
+  background-color: #f1cbff;
   padding: 5px 10px;
   text-align: center;
   text-decoration: none;
@@ -174,6 +187,7 @@ body {
   padding-top: 5px;
 }
 
+/* MEDIA QUERIES--------------------------- */
 /* @media (max-width: 500px) {
   .displayQBox {
     max-width: 500px;
