@@ -68,7 +68,7 @@ app.controller('MainController', ['$http', function($http) {
          method: 'POST',
          // url: this.herokuUrl + '/favorites',
          url: this.url + '/users/' + this.user.id + '/favorites',
-         data: this.formData
+         data: this.formData,
        }).then(response => {
          this.heartRed();
          console.log("non-push userfaves: ", this.userfaves);

@@ -65,11 +65,28 @@ body {
   display: flex;
 }
 
+/* FONT SIZE ----------------*/
+.signUpBtn, .logInBtn, .error {
+  font-size: 20px;
+}
+.rightNav > p {
+  font-size: 20px
+}
+.showFavesBtn {
+  font-size: 14px;
+}
+.midNav > h1 {
+  font-size: 40px;
+}
+.displayQBox > p{
+  font-size: 30px;
+}
+
 /* Questions display-------------- */
 .displayQBox {
   border: 2px dashed black;
-  min-height: 50px;
-  width: 800px;
+  min-height: 100px;
+  width: 1000px;
   margin: auto;
   display: flex;
   justify-content: center;
@@ -121,7 +138,7 @@ body {
   padding: 15px 32px;
   text-align: center;
   text-decoration: none;
-  font-size: 16px;
+  font-size: 30px;
   font-family: 'Open Sans', sans-serif;
 }
 .genBtn:hover{
