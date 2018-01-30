@@ -1,7 +1,6 @@
 {
   "name": "oh-hey-app-frontend",
   "version": "1.0.0",
-  "description": "",
   "main": "server.js",
   "dependencies": {
     "express": "^4.16.2"
@@ -20,5 +19,7 @@
   "bugs": {
     "url": "https://github.com/ggiscool/oh-hey-app-frontend/issues"
   },
-  "homepage": "https://github.com/ggiscool/oh-hey-app-frontend#readme"
+  "homepage": "https://github.com/ggiscool/oh-hey-app-frontend#readme",
+  "keywords": [],
+  "description": ""
 }
