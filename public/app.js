@@ -107,10 +107,10 @@ app.controller('MainController', ['$http', function($http) {
     }
   }
 
-  //CHange heart to red
- this.heartRed = () => {
-   document.getElementById('heart').style.color = "red";
- }
+//Heart button
+  this.heartRed = () => {
+    document.getElementById('heart').style.color = "red";
+  }
 
   this.changeHeart = (newQuestion) => {
     for (i=0; i<this.userfaves.length; i++) {
