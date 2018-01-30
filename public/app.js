@@ -4,6 +4,7 @@ app.controller('MainController', ['$http', function($http) {
 
   // INITIAL STATES
   this.url = "http://localhost:3000";
+  this.herokuUrl = "https://chatter-up-app.herokuapp.com/";
   this.user = {};
 	this.loggedIn = false;
   this.loginForm = false;
