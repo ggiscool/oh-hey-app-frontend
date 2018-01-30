@@ -23,8 +23,8 @@ app.controller('MainController', ['$http', function($http) {
   // Get categories
   	$http({
   		method: 'GET',
-  		// url: this.herokuUrl + '/categories'
-  		url: this.url + '/categories'
+  		url: this.herokuUrl + '/categories'
+  		// url: this.url + '/categories'
   	}).then(response => {
   		this.categories = response.data;
       console.log(this.categories);
@@ -35,11 +35,9 @@ app.controller('MainController', ['$http', function($http) {
   this.getQs = () =>{
   	$http({
   		method: 'GET',
-  		// url: this.herokuUrl + '/categories/1/questions'
-  		url: this.url + '/categories/1/questions'
+  		url: this.herokuUrl + '/categories/1/questions'
+  		// url: this.url + '/categories/1/questions'
   	}).then(response => {
-      // this.questionViewed = true;
-      // this.liked = false;
       console.log("getting questions...");
   		this.questions = response.data;
       console.log(this.questions);
@@ -66,8 +64,8 @@ app.controller('MainController', ['$http', function($http) {
 
        $http({
          method: 'POST',
-         // url: this.herokuUrl + '/favorites',
-         url: this.url + '/users/' + this.user.id + '/favorites',
+         url: this.herokuUrl + '/users/' + this.user.id + '/favorites',
+         // url: this.url + '/users/' + this.user.id + '/favorites',
          data: this.formData,
        }).then(response => {
          this.heartRed();
@@ -78,7 +76,6 @@ app.controller('MainController', ['$http', function($http) {
        }).catch(reject => {
          console.log('Reject: ', reject);
        });
-       // this.changeHeart();
      }
 
 //FAVORITES GET route
@@ -86,12 +83,11 @@ app.controller('MainController', ['$http', function($http) {
   this.showFaves = () => {
     $http({
     method: 'GET',
-    // url: this.herokuUrl + '/categories/1/questions/' + this.questionID + '/answers',
-    url: this.url + '/users/' + this.user.id + '/favorites/',
+    url: this.herokuUrl + '/users/' + this.user.id + '/favorites/',
+    // url: this.url + '/users/' + this.user.id + '/favorites/',
     }).then(response => {
       this.userfaves = response.data;
       console.log("userfaves: ", this.userfaves);
-      // console.log("response: ", response);
     }).catch(reject => {
      console.log('Reject: ', reject);
     });
@@ -99,7 +95,6 @@ app.controller('MainController', ['$http', function($http) {
   }
 
   this.displayFaves = () => {
-    // this.showFaves();
     if (this.showFavesModal == false) {
     this.showFavesModal = true
     } else {
@@ -153,8 +148,8 @@ app.controller('MainController', ['$http', function($http) {
   //GET users
   this.getUsers = () => {
     $http({
-    	 // url: this.herokuUrl + '/users',
-    	 url: this.url + '/users',
+    	 url: this.herokuUrl + '/users',
+    	 // url: this.url + '/users',
     	 method: 'GET',
     	 headers: {
     		Authorization: 'Bearer ' + JSON.parse(localStorage.getItem('token'))
@@ -175,8 +170,8 @@ this.login = (userLogin) => {
   this.userfaves = [];
 	$http({
 	 method: 'POST',
-	 url: this.url + '/users/login',
-   // url: this.herokuUrl + '/users/login',
+	 // url: this.url + '/users/login',
+   url: this.herokuUrl + '/users/login',
 	 data: { user: { username: userLogin.username, password: userLogin.password }},
  }).then(response => {
    if (response.data.status == 200) {
@@ -199,8 +194,8 @@ this.createUser = (userPass) => {
   this.userfaves = [];
 	$http({
 	 method: 'POST',
-	 // url: this.herokuUrl + '/users',
-	 url: this.url + '/users',
+	 url: this.herokuUrl + '/users',
+	 // url: this.url + '/users',
 	 data: { user: { username: userPass.username, password: userPass.password }},
  }).then(response => {
 
@@ -209,7 +204,6 @@ this.createUser = (userPass) => {
    localStorage.setItem("token", JSON.stringify(response.data.token));
 
 	 if (response.status == 200) {
-	 	// this.openRegForm();
     this.regForm = false;
 	 }
    if (this.user.username !== null) {
@@ -223,8 +217,8 @@ this.createUser = (userPass) => {
 
 this.getUsers = () => {
  $http({
-	 // url: this.herokuUrl + '/users',
-	 url: this.url + '/users',
+	 url: this.herokuUrl + '/users',
+	 // url: this.url + '/users',
 	 method: 'GET',
 	 headers: {
 		Authorization: 'Bearer ' + JSON.parse(localStorage.getItem('token'))
