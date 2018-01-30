@@ -66,14 +66,14 @@ body {
 }
 
 /* FONT SIZE ----------------*/
-.signUpBtn, .logInBtn, .error {
+.signUpBtn, .logInBtn, .logOutBtn, .error {
   font-size: 20px;
 }
 .rightNav > p {
   font-size: 20px
 }
 .showFavesBtn {
-  font-size: 14px;
+  font-size: 14px !important;
 }
 .midNav > h1 {
   font-size: 40px;

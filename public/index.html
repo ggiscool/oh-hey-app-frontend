@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html ng-app='ChatApp'>
   <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans|Ubuntu" rel="stylesheet">
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular.min.js"></script>
     <link rel="stylesheet" type="text/css" href="style.css">
@@ -49,12 +49,12 @@
           </div>
       <!-- WELCOME USER -->
         <div class="rightNav">
-            <p ng-if="ctrl.loggedIn == true">Welcome: <span class="purple">{{ ctrl.user.username }}!</span></p>
+            <p ng-if="ctrl.loggedIn == true">Welcome <span class="purple">{{ ctrl.user.username }}!</span></p>
         </div>
 
 <!-- FAVE BAR BUTTON -->
         <div class="showFaves">
-          <button class="showFavesBtn" ng-click="ctrl.displayFaves()">Peep Faves</button>
+          <button class="showFavesBtn" ng-click="ctrl.displayFaves()">Faves</button>
         </div>
       </div>
 
